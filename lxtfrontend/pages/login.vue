@@ -6,11 +6,7 @@
                     Log in
                 </div>
                 <div class="card-body">
-                    <form action="" method="">
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="name" name="name">                    
-                        </div>
+                    <form action="" method="" @submit.prevent="userLogin">                
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
                             <input type="email" class="form-control" id="email" name="email">
@@ -29,7 +25,24 @@
 
 <script>
 export default {
-    
+    data() {
+        return {
+            login: {
+                email: 'guqovyhana@mailinator.com',
+                password: 'passw0rd',
+            }
+        }
+    },
+    methods: {
+    async userLogin() {
+      try {
+        let response = await this.$auth.loginWith('local', { data: this.login })
+        console.log(response)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+  }
 }
 </script>
 
